@@ -1,25 +1,63 @@
-programa      ::= "aquecimento" { comando } "fim" ;
+# TenisLang
 
-comando       ::= declaracao | atribuicao | condicional | loop | imprimir ;
+Linguagem de programacao tematica de tenis 
 
-declaracao    ::= "jogador" IDENT "é" tipo ";" ;
-atribuicao    ::= IDENT "recebe" expressao ";" ;
-condicional   ::= "desafio" "(" expressao ")" "saque" bloco [ "replay" bloco ] ;
-loop          ::= "rally" "(" expressao ")" "saque" bloco ;
-bloco         ::= "[" { comando } "devolve" ] ;
+## EBNF 
 
-imprimir      ::= "grita" "(" expressao ")" ";" ;
+```
+<program>           ::= "warmup" { <command> } "gameOver"
 
-expressao     ::= termo { ("+" | "-" | "ou") termo } ;
-termo         ::= fator { ("*" | "/" | "e") fator } ;
-fator         ::= NUMBER | STRING | BOOL | IDENT | "(" expressao ")" ;
+<command>           ::= <declaration>
+                      | <assignment>
+                      | <print>
+                      | <conditional>
+                      | <loop>
 
-tipo          ::= "ponto" | "fala" | "marca" ;
+<declaration>       ::= "player" <id> "is" <type> ";"
 
-IDENT         ::= letras { letras | digitos | "_" } ;
-NUMBER        ::= digitos ;
-STRING        ::= '"' { qualquer_caractere } '"' ;
-BOOL          ::= "sim" | "nao" ;
+<assignment>        ::= <id> "gets" <relational> ";"
 
-letras        ::= "a" | "b" | ... | "z" | "A" | "B" | ... | "Z" ;
-digitos       ::= "0" | "1" | ... | "9" ;
+<print>             ::= "shout" "(" <relational> ")" ";"
+
+<conditional>       ::= "challenge" "(" <relational> ")" 
+                        "serve" <block> 
+                        [ "replay" <block> ]
+
+<loop>              ::= "rally" "(" <relational> ")" 
+                        "serve" <block>
+
+<block>             ::= "[" { <command> } "return" ]
+
+<relational>        ::= <expression> [ ("equal" | "greater" | "less") <expression> ]
+
+<expression>        ::= <term> { ("+" | "-" | "or") <term> }
+
+<term>              ::= <factor> { ("*" | "/" | "and") <factor> }
+
+<factor>            ::= <number>
+                      | <boolean>
+                      | <string>
+                      | <id>
+                      | "crowd()" 
+                      | "(" <relational> ")"
+                      | "+" <factor>
+                      | "-" <factor>
+
+<type>              ::= "point" | "speech" | "flag"
+
+<boolean>           ::= "in" | "out"
+
+<number>            ::= [ "-" ] <digit> { <digit> }
+
+<string>            ::= "\"" { any_non_quote_character } "\""
+
+<id>                ::= <letter> { <letter> | <digit> | "_" }
+
+<letter>            ::= "a" | ... | "z" | "A" | ... | "Z"
+<digit>             ::= "0" | ... | "9"
+
+```
+
+---
+
+
