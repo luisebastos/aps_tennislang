@@ -1,0 +1,49 @@
+warmup
+    player federer is point;
+    player williams is point;
+
+    shout("Game Start!");
+    
+    federer hits 15;
+    williams hits 30;
+
+    letShot(federer greater 10) serve
+        federer hits 30;
+        williams hits 30;
+    smash
+
+    challenge(williams equal 30) serve
+        williams hits 40;
+    smash
+    replay serve
+        federer hits 40;
+    smash
+
+    rally(federer greater williams) serve
+        federer hits 70;
+        williams hits 70;
+    smash
+
+    ace serve
+        federer hits 80;
+    smash
+
+    tiebreak {
+        if federer greater williams:
+            serve
+                federer hits 100;
+            smash
+    }
+
+    strategy push() serve
+        federer hits 90;
+    smash
+    strategy push();
+
+    coach("Focus on baseline play");
+
+    glossary definitions {
+        "ACE": "A perfect serve.";
+        "LETSHOT": "A let shot nets call.";
+    }
+matchPoint
