@@ -1,0 +1,6 @@
+warmup
+    player federer is point;
+    challenge(williams equal 30) serve
+        williams hits 40;
+    smash
+matchPoint
